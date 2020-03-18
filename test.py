@@ -23,5 +23,25 @@ test_ABC1.initialize_parameters([0.0, 1.0])
 # Launch...
 test_list1 = test_ABC1.ABC(prior_paras=[0.0, 1.0, 1.0, 2.0])
 
+# %%
+# Plot and compare the prediction and the observation
+import matplotlib.pyplot as plt
+# The true data
+plt.plot(time, observations, 'o')
+
+# Collect the inferred parameters
+para_inferred = []
+para_inferred.append(np.mean(test_list1[0][20, :]))
+para_inferred.append(np.mean(test_list1[1][20, :]))
+
+# Predict the infection till 21 days
+extend_time = np.arange(21)
+y_inferred = model1(para_inferred, np.arange(21))
+
+# Plot the prediction
+plt.plot(extend_time, y_inferred, 'x', color='r')
+plt.xlabel("Days")
+plt.ylabel('Number of infected cases')
+
 
 # %%
